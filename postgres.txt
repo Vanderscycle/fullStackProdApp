@@ -1,0 +1,16 @@
+find the status
+service postgresql status 
+default user for postgres the user is postgres (the fvery first user)
+sudo su postgres (if it gives you error start the serve)
+
+psql (command line)
+\l (all the dbs)
+\du (all the users)
+change the password of the default user
+ALTER USER postgres WITH PASSWORD '';
+CREATE USER <username> WITH PASSWORD; 
+ALTER USER <username> WITH SUPERUSER;
+DROP USER <username>;
+
+all commands: (make sure to use a new cli tab)
+man psql

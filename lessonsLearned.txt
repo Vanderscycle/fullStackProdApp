@@ -1,0 +1,115 @@
+django-admin startproject {name of file} . # the dot means current location like docker
+to run the app
+python manage.py runserver
+settings.py
+app in settings better thought of components (litte pieces)
+middleware (request)
+save the key in your environment
+wsgi web server gateway interface
+It is used to forward requests from a web server (such as Apache or NGINX) to a backend Python web application or framework. 
+
+Migrations¶
+https://docs.djangoproject.com/en/3.1/topics/migrations/
+Migrations are Django’s way of propagating changes you make to your models (adding a field, deleting a model, etc.) into your database schema.
+e.g. we want to add an admin to the app
+1. python manage.py makemigrations
+2. python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver localhost:5032 # streaming to a specific ip:port
+create custom microservices
+python manage.py startapp {name of microservice}
+
+You can create app in the terminal using hte shell command.
+python manage.py shell
+#import the class you need for the item
+from products.models import Product
+#show all items (also don't forget that objects has an s)
+Product.objects.all()
+#get a single product
+Product.objects.get(id=1)
+# create a test module
+Product.objects.create(title="new prod 2", description ='another one',price='69.99')
+
+In the product class we so far only used a single type of field (textfield)
+https://docs.djangoproject.com/en/3.1/ref/models/fields/
+
+if you delete the database you will have to create the superuseragain
+To make change without deleting the db:
+when you run makemigrations and migrate it syncs the db with the model
+
+To create custom pages we must create a new app that will store all of our pages
+python manage.py startapp pages
+    views.py (a place that handle various webpages)
+
+learn about *args and **kwargs
+
+*** postgres sql
+sudo -u postgres -i
+(inside)
+psql
+
+\l (list db)
+\q (to quit)
+
+django templating (html)
+template inheritance
+    have to use base.html
+templates are not just for inheritance. We also want data from the backend( our db)
+
+for built-in templates and filters (really cool stuff)
+https://docs.djangoproject.com/en/3.1/ref/templates/builtins/
+
+if you have to do alot of if-elif-else statement it is better to do it in the views.py than in the html template for clarity sakes.
+warning!
+Pay attention to variable names used in templates as they may conflict with variables passed fromcontext and 
+
+Django template syntax
+
+Although there are over one hundred built-in constructs that help you build Django templates -- all of which you'll learn as this chapter progresses -- to start out, these are the most important syntax elements you need to recognize:
+
+    {{output_variable}}.- Values surrounded by double curly braces at the start and end represent output for variables. Variables are passed by Django views, url options or context processors into templates. In a template, you can use {{}} to output the contents of a variable, as well as use Python's dot notation to output deeper elements of a variable (e.g. fields, keys, methods). For example, {{store.name}} tells a Django template to output the store variable's name, where store can be an object and name a field or store can be a dictionary and name a key.
+    {% tag %} .- Values surrounded by curly braces wrapped with percentage signs are called tags. Django tags offer complex formatting logic wrapped in a simple syntax representation.
+    variable|filter .-Values declared after a vertical bar | are called filters. Django filters offer a way to apply formatting logic to individual variables.
+
+Djangop templating
+fyi, I created a identical template folder inside the product app from the template/product file. I also added the path to it in the settings.py file
+Django model forms
+We want users to save data into the database not through the /admin or the shel (both of which they will not have access). 
+To do so we create forms.py inside the product app (will work for any models)
+
+---- security a MUST for production environment
+since all website will eventually be attacked
+use CSRF (usage of secret)
+https://docs.djangoproject.com/en/3.1/topics/security/
+
+I will need to learn about SSL/HTTPS
+
+
+----
+
+Eventually we will wnant to dockerize everything with the database postgres (obviously)
+- help and QA can be Eks
+ have nginx -> {unix socket} ->uWSGI(using uwsgi to communicate to NGINX) -> Django -> python/databases (depending on the request)
+We will deploy this on AWS using docker because I love docker
+Budget 1k? wasted money on worse things than that e.g. booze
+
+
+unix socket: https://serverfault.com/questions/124517/what-is-the-difference-between-unix-sockets-and-tcp-ip-sockets
+uWSGI : https://stackoverflow.com/questions/38601440/what-is-the-point-of-uwsgi
+
+https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-18-04
+
+
+---- quick recap on migrations
+
+
+    Getting Help 
+
+    Language: en 
+
+    Documentation version: 3.1 
+
+Migrations¶
+
+Migrations are Django’s way of propagating changes you make to your models (adding a field, deleting a model, etc.) into your database schema. 
+They’re designed to be mostly automatic, but you’ll need to know when to make migrations, when to run them, and the common problems you might run into.

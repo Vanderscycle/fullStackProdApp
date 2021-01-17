@@ -1,0 +1,14 @@
+productivity website:
+features:
+Mental health tracker ( of note this is sensitive data so we have to be along the line of a mood tracker nothing )
+calendar api 
+study helper (pomodoro)
+kanban board
+postgres sql
+goal setter short/med/long
+    - day planner proposal ()
+
+mix of on demand report producer on many aspect of life
+
+theme (dusk)
+mostly dark theme tho
