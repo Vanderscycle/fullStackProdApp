@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+<!-- don't forget to add it to the urls.py (import first and then add it to urlpatterns)-->
+{% block content %}
+<form action = '.' method ='POST'> {% csrf_token %}
+    <!-- .as_p method render the form as paragraph text. yu can do as_ul (for example)
+    'Note that this works for Pure Django form and Django Model form'
+    -->
+    {{ GratefulForm.as_p }}
+    <input type='submit' value='save thought'/>
+    {{ SmallVictoryForm.as_p }}
+    <input type='submit' value='save thought'/>
+</form>
+{% endblock %}

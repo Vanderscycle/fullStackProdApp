@@ -3,8 +3,41 @@ from django.shortcuts import (
         get_object_or_404,
         redirect
     )
+# usefull to query db
+from .models import (
+        GratefulFor,
+        SmallVictory
+    )
+# form to enter in db
+from .forms import (
+    GratefulForForm,
+    SmallVictoryForm
+    )
 
-# Create your views here.
+def journaling_list_view(request):
+    # will need some logic to only allow per user
+    querysetGrateful = GratefulFor.objects.all()
+    querysetSmallVic = SmallVictory.objects.all()
+    context = {
+        "gratefulList":querysetGrateful,
+        'smallVicList':querysetSmallVic
+    }
+    return render(request,'journaling/journal_list.html',context)
+
+def journaling_create_view(request):
+
+    formGrateful = GratefulForForm(request.POST or None)
+    formSmallVictory = SmallVictoryForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        #clears all the fields after the post method
+        formGrateful = GratefulForForm()
+        formSmallVictory = SmallVictoryForm()
+    context = {
+        'GratefulForm':formGrateful,
+        'SmallVictoryForm':formSmallVictory 
+    }
+    return render(request,'journaling/journal_create.html',context)
 
 def journaling_view(request):
     context = {

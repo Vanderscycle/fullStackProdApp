@@ -12,3 +12,7 @@ mix of on demand report producer on many aspect of life
 
 theme (dusk)
 mostly dark theme tho
+
+Goal:
+- learn postgres in detail
+- learn proper bash shell scripting for automation (would be a cool tutorial)

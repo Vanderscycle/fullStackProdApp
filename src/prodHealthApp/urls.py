@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 #journaling pages
-from journaling.views import *
+from journaling.views import (
+        journaling_create_view,
+        journaling_list_view
+    )
 #general pages
 from pages.views import (
         home_view,
@@ -25,5 +28,9 @@ from pages.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name='home'),
-    path('about/', about_view,name='about')
+    path('about/', about_view,name='about'),
+    # will have to make the address better(inside the app folder)
+    path('journalList/', journaling_list_view),
+    path('journalCreate/',  journaling_create_view)
+
 ]
