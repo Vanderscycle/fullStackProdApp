@@ -26,15 +26,20 @@ def journaling_list_view(request):
 
 def journaling_create_view(request):
 
-    formGrateful = GratefulForForm(request.POST or None)
+    # formGrateful = GratefulForForm(request.POST or None)
     formSmallVictory = SmallVictoryForm(request.POST or None)
-    if form.is_valid():
-        form.save()
+    if formSmallVictory.is_valid():
+        formSmallVictory.save()
         #clears all the fields after the post method
-        formGrateful = GratefulForForm()
         formSmallVictory = SmallVictoryForm()
+
+    # elif formGrateful.is_valid():
+    #     formGrateful.save()
+    #     #clears all the fields after the post method
+    #     formGrateful = GratefulForForm()
+
     context = {
-        'GratefulForm':formGrateful,
+        # 'GratefulForm':formGrateful,
         'SmallVictoryForm':formSmallVictory 
     }
     return render(request,'journaling/journal_create.html',context)
