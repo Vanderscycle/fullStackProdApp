@@ -44,6 +44,7 @@ esac
 # simply call the script ./routine.sh but you have to use the old source
 # source ./routine.sh (correctly activates the environment)
 # cd '/home/henri/Documents/Post Lighthouse-Lab work/localFilesWebsite/src'
-# cat is used to read the content of a file
+# cat is used to read the content of a file line by line
 # find . {local folder system} -name <name file>
+# if you  were to do find / -name <name file > it would search the entire system
 # https://www.tecmint.com/35-practical-examples-of-linux-find-command/
