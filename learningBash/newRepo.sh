@@ -4,12 +4,21 @@ DESIRED_ENV=NNScraper
 conda activate $DESIRED_ENV 
 # add actions (later) because we are going the DevOps CI/CD route
 function gitFiles(){
+    # -f for file -d for directoy
+    if [ ! -d .github ]
+    then
+        # -p for parents
+        mkdir actions-a
+        mkdir -p .github/workflows
+        echo 'created the workflows and actions-a folders'
+    fi
 
     if [ ! -f README.md ]
     then
         touch README.md
         echo 'README.md file created'
-
+    fi
+    
     if [ ! -f .gitignore ]
     then
         touch .gitignore
@@ -29,8 +38,8 @@ EOL
         touch .env
         echo 'empty .env file created'
     fi
-    
 }
+
 # Dockerfile/.dockerignore/requirements.txt (requires pipreqs)
 function dockerFiles(){
 
