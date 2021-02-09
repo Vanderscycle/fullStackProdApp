@@ -14,7 +14,7 @@ case $ORDER in
         echo 'making migration'
         python manage.py makemigrations
         echo 'migrating'
-        python manage.py migrate
+        python manage.py m grate
         ;;
     [pP][sS] | [postgres])
         # we look for .env file with all the secrets

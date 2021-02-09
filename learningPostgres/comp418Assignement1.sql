@@ -42,13 +42,16 @@ FROM student s
 JOIN registration r
     ON s.SID = r.fk_student
 WHERE r.fk_courseno = 51 AND r.grade >= 70;
+
+
 -- querry two
 EXPLAIN ANALYSE SELECT c.courseno,c.title,COUNT(r.fk_student) as blwAvg
 FROM course c
 JOIN registration r
     ON r.fk_courseno = c.courseno
 WHERE r.grade <50
-GROUP BY c.courseno
+GROUP BY c.courseno;
+
 -- querry three
 SELECT c.courseno,c.title
 FROM course c
@@ -62,3 +65,25 @@ UPDATE course
 
 -- EXPLAIN ANALYZE /EXPLAIN VERBOSE
 -- https://www.youtube.com/watch?v=Kdjz2e8HYPU
+
+-- list all indexes
+SELECT
+    tablename,
+    indexname,
+    indexdef
+FROM
+    pg_indexes
+WHERE
+    schemaname = 'public'
+ORDER BY
+    tablename,
+    indexname;
+
+-- only list index for a select table
+SELECT
+    indexname,
+    indexdef
+FROM
+    pg_indexes
+WHERE
+    tablename = 'table_name';
