@@ -10,7 +10,7 @@ function gitFiles(){
         # -p for parents
         mkdir actions-a
         mkdir -p .github/workflows
-        echo 'created the workflows and actions-a folders'
+        echo 'Created the workflows and actions-a folders'
     fi
 
     if [ ! -f README.md ]
@@ -18,13 +18,14 @@ function gitFiles(){
         touch README.md
         echo 'README.md file created'
     fi
-    
+
     if [ ! -f .gitignore ]
     then
         touch .gitignore
         echo '.gitignore file created'
         #EOL sometimes gives you errors if there is a space after
         cat >> .gitignore << EOL
+newRepo.sh
 .ipynb_checkpoints
 .log
 __pycache__
@@ -36,7 +37,7 @@ EOL
     if [ ! -f .env ]
     then
         touch .env
-        echo 'empty .env file created'
+        echo 'Empty .env file created'
     fi
 }
 
@@ -46,7 +47,7 @@ function dockerFiles(){
     if [ ! -f Dockerfile ]
     then
         touch Dockerfile
-        echo 'empty Dockerfile file created'
+        echo 'Empty Dockerfile file created'
         cat >> Dockerfile << EOL
 FROM 
 LABEL maintainer "Henri Vandersleyen <hvandersleyen@gmail.com>"
@@ -67,12 +68,12 @@ __pycache__
 EOL
     fi
     
-    echo 'creating the requirements.txt file'
+    echo 'Creating the requirements.txt file'
     pipreqs . #pip install pipreqs # if not installed on your machine
     read -p 'Do you want to keep the python module version in requirements.txt? [y/n]': YSNOANS
     case $YSNOANS in
         [yY] | [yY][eE][sS])
-        echo 'removing the python module version'
+        echo 'Removing the python module version'
         # using sed to remove the version of each file -i flag updates the file name
         sed -i 's/==.*//' requirements.txt
         ;;
@@ -89,18 +90,41 @@ read -p 'What do you want to create? (git/docker/both)': ANSWER
 
 case $ANSWER in
     [gG] | [gG][iI][tT]) #g or git
-        echo 'creating git files'
+        echo 'Creating git files'
         gitFiles
         ;;
     [dD] | [dD][oO][cC][kK][eE][rR])
-        echo 'creating docker files'
+        echo 'Creating docker files'
         dockerFiles
         ;;
     [bB] | [bB][oO][tT][hH])
-        echo 'creating both git and docker files'
+        echo 'Creating both git and docker files'
         gitFiles
         dockerFiles
         ;;
     *)
         echo 'Please enter g/git, d/docker or b/both'
+esac
+read -p 'Do you want to init a new repo': ANSWERGIT
+
+case $ANSWERGIT in
+    [yY] | [yY][eE][sS])
+    echo 'creating the repo'
+    if [ ! -d .git ]
+    then
+        git init
+    fi
+    git add *
+    git commit -a -m 'first commit'
+    git branch -M main 
+    read -p 'What is the HTTPS GitHub address?': ADDRESS
+    git remote add origin $ADDRESS
+    echo 'pushing first commit to main'
+    git push -u origin main
+    git config --global credential.helper wincred
+    git pull
+    ;;
+    [nN] | [nN][oO])
+    echo 'No new repo created'
+    ;;
 esac
