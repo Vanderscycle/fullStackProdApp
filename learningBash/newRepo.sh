@@ -18,20 +18,12 @@ function gitFiles(){
         touch README.md
         echo 'README.md file created'
     fi
-
     if [ ! -f .gitignore ]
     then
         touch .gitignore
         echo '.gitignore file created'
-        #EOL sometimes gives you errors if there is a space after
-        cat >> .gitignore << EOL
-newRepo.sh
-.ipynb_checkpoints
-.log
-__pycache__
-.vscode
-.env
-EOL
+        # the alternative is to use an EOL and define what
+        curl https://raw.githubusercontent.com/github/gitignore/master/Python.gitignore --output .gitignore # recommend raw for github otherwise there's html formatting
     fi
 
     if [ ! -f .env ]
@@ -48,6 +40,7 @@ function dockerFiles(){
     then
         touch Dockerfile
         echo 'Empty Dockerfile file created'
+        #EOL sometimes gives you errors if there is a space after the statment
         cat >> Dockerfile << EOL
 FROM 
 LABEL maintainer "Henri Vandersleyen <hvandersleyen@gmail.com>"
@@ -109,22 +102,22 @@ read -p 'Do you want to init a new repo': ANSWERGIT
 
 case $ANSWERGIT in
     [yY] | [yY][eE][sS])
-    echo 'creating the repo'
-    if [ ! -d .git ]
-    then
-        git init
-    fi
-    git add *
-    git commit -a -m 'first commit'
-    git branch -M main 
-    read -p 'What is the HTTPS GitHub address?': ADDRESS
-    git remote add origin $ADDRESS
-    echo 'pushing first commit to main'
-    git push -u origin main
-    git config --global credential.helper wincred
-    git pull
+        echo 'creating the repo'
+        if [ ! -d .git ]
+        then
+            git init
+        fi
+        git add *
+        git commit -a -m 'first commit'
+        git branch -M main 
+        read -p 'What is the HTTPS GitHub address?': ADDRESS
+        git remote add origin $ADDRESS
+        echo 'pushing first commit to main'
+        git push -u origin main
+        git config --global credential.helper wincred
+        git pull
     ;;
     [nN] | [nN][oO])
-    echo 'No new repo created'
+        echo 'No new repo created'
     ;;
 esac
