@@ -63,15 +63,15 @@ EOL
     
     echo 'Creating the requirements.txt file'
     pipreqs . #pip install pipreqs # if not installed on your machine
-    read -p 'Do you want to keep the python module version in requirements.txt? [y/n]': YSNOANS
+    read -p 'Do you want to remove the python module version in requirements.txt? [y/n]': YSNOANS
     case $YSNOANS in
         [yY] | [yY][eE][sS])
-        echo 'Removing the python module version'
-        # using sed to remove the version of each file -i flag updates the file name
-        sed -i 's/==.*//' requirements.txt
+            echo 'Removing the python module version'
+            # using sed to remove the version of each file -i flag updates the file name
+            sed -i 's/==.*//' requirements.txt
         ;;
         [nN] | [nN][oO])
-        echo 'NIL changes to requirements.txt'
+            echo 'NIL changes to requirements.txt'
         ;;
     esac
 }
