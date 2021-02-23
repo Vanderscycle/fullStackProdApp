@@ -17,8 +17,7 @@ import os
 env = environ.Env()
 # reading .env file
 environ.Env.read_env()
-DEBUG = env('DEBUG')
-POSTGRES_ADMIN_SECRET = env('POSTGRES_ADMIN_SECRET')
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,9 +30,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '&na+_nlza69qe^0$86lu5((^r)8#*k*&iff&i(l)vy(#wj+rsg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+DEBUG = env('DEBUG')
+ALLOWED_HOSTS = ['192.168.1.95','107.190.20.126','.testDjango.com','127.0.0.1','localhost','neuraldomains.com']
 
 
 # Application definition
@@ -68,6 +66,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR,'templates')
+            
         
         ],
         'APP_DIRS': True,
@@ -93,7 +92,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'productivityapp',
         'USER': 'root',
-        'PASSWORD': POSTGRES_ADMIN_SECRET,
+        'PASSWORD': env('POSTGRES_ADMIN_SECRET'),
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -137,3 +136,23 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static/admin",
+    '/var/www/static/',
+]
+STATIC_ROOT = os.path.join(BASE_DIR,'static/')
+
+#email section
+# https://dev.to/abderrahmanemustapha/how-to-send-email-with-django-and-gmail-in-production-the-right-way-24ab
+# future improvement
+# https://github.com/anymail/django-anymail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'stmp.gmail.com'
+EMAIL_HOST_USER = 'hvandersleyen@gmail.com'
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_KEY')
+# EMAIL_HOST_PASSWORD = env('GMAIL_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+#from django.core.mail import send_mail
+#send_mail('django test mail','this is a test','hvandersleyen@gmail.com',['hvandersleyen@gmail.com'],fail_silently=False)

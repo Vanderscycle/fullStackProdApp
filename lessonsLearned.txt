@@ -113,3 +113,10 @@ Migrations¶
 
 Migrations are Django’s way of propagating changes you make to your models (adding a field, deleting a model, etc.) into your database schema. 
 They’re designed to be mostly automatic, but you’ll need to know when to make migrations, when to run them, and the common problems you might run into.
+
+scp (secure copy file) is a way to copy
+chmod command generator https://chmodcommand.com/
+chmod (Owner)(Group)(Other)
+chmod 700 (U)ser / owner can read, can write and can execute. (G)roup can't read, can't write and can't execute. (O)thers can't read, can't write and can't execute.
+chmod 600 (U)ser / owner can read, can write and can't execute. (G)roup can't read, can't write and can't execute. (O)thers can't read, can't write and can't execute.
+ufw (uncomplicated fire wall)

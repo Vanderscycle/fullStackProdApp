@@ -1,15 +1,19 @@
+{% load static %}
+{% block main_css%}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title> My take on productivity apps</title>
-</head>
-<body>
     
-    {% include 'navbar.html' %}
-    {% block content %}
-
-    {% endblock %}
-
-</body>
-</html>
+    <head>
+        <title> My take on productivity apps</title>
+    </head>
+    <body>
+        
+        {% include 'navbar.html' %}
+        {% block content %}
+        
+        {% endblock %}
+        
+    </body>
+    </html>
+{% endblock %}

@@ -1,7 +1,13 @@
 {% extends 'base.html'%}
 
 {% block content %}
-
-<p>Author: {{author}}</p>
-<p>Contact: {{email}}</p>
+About
+<u>
+    <li>
+        <a>Author: {{author}}</a>
+    </li>
+    <li>
+        <a href={{ github }}>GitHub</a>
+    </li>
+</u>
 {% endblock %}
